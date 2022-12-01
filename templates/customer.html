@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+
+{% block body %}
+	<section class="page-section">
+		<div class="container px-4 px-lg-5">
+			<h2 class="text-center mt-0">Customer</h2>
+			<hr class="divider">
+			<input class="visually-hidden" autocomplete="off" placeholder="Find by name" type="search">
+			<div class="row gx-4 gx-lg-5">
+				<div class="col-lg-8-text-left">
+					<div class="row align-middle">
+						<div class="col-9">
+							<table id="customer-table" class="table text-black mb-4 text-left table-hover">
+								<thead>	
+									<th>ID</th>
+									<th>SSN</th>
+									<th>Name</th>
+									<th>Phone</th>
+									<th>Email</th>
+									<th>Username</th>
+									<th>Point</th>
+									<th>Rank</th>
+								</thead>
+								<tbody>
+									{% for customer in customers%}
+										<tr>
+											<td>{{ customer["id"] }}</td>
+											<td>{{ customer["ssn"] }}</td>
+											<td>{{ customer["name"] }}</td>
+											<td>{{ customer["phone"] }}</td>
+											<td>{{ customer["email"] }}</td>
+											<td>{{ customer["username"] }}</td>
+											<td>{{ customer["point"] }}</td>
+											<td>
+												{% if customer["customer_rank"] == 1 %}
+													Potential
+												{% elif customer["customer_rank"] == 2 %}
+													Loyal
+												{% elif customer["customer_rank"] == 3 %}
+													VIP
+												{% elif customer["customer_rank"] == 4 %}
+													Super VIP
+												{% endif %}
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+
+						<div class="col-3 h-100" id="customer-detail">
+							<!-- START SAMPLE CARD -->
+							<div id="sample" class="card">
+								<div class="card-body">
+									<h2 class="card-title">Choose a customer</h2>
+									<h6 class="card-subtitle mb-2 text-muted">To view detailed information</h6>
+									<p class="card-text"></p>
+								</div>
+							</div>
+							<!-- END SAMPLE CARD -->
+							<!-- START WORD CARD -->
+							<div id="customer-card" class="card visually-hidden">
+								<div class="card-body">
+									<h2 id="card-name" class="card-title"></h2>
+									<h3 id="card-id" class="card-subtitle mb-2 text-muted"></h3>
+									<h5 id="card-info-title" class="">Booking detail</h5>
+									<div id="order-info"></div>
+								</div>
+							</div>
+							<!-- END WORD CARD -->
+						</div>	
+					</div>
+				</div>
+		  	</div>
+		</div>
+	</section>
+
+	<script>
+		$(document).ready(function () {
+			let table = $("#customer-table").DataTable({paging: false, info: false, "search": {"smart": false}})
+
+			$("#customer-table tbody").on("click", "tr", function () {
+				console.log(table.row(this).data())
+				let row = table.row(this).data()
+				console.log(row)
+				customerInfoQuery(row)
+			});
+		});
+
+		const customerInfoQuery = async function(row) {
+			let customerID = row[0]
+			console.log(customerID)
+			let response = await fetch('/customer/detail?q=' + customerID);
+			let detailRender = await response.text();
+			console.log(detailRender)
+			document.querySelector('#order-info').innerHTML = detailRender;
+			document.querySelector('#card-id').innerHTML = row[0];
+			document.querySelector('#card-name').innerHTML = row[2];
+			showCard()
+		}
+
+		const showCard = function() {
+			//hide sample card (prompt for word choice)
+			document.getElementById('sample').classList.add('visually-hidden')
+			//show word card (chosen word)
+			document.getElementById('customer-card').classList.remove('visually-hidden')
+		}
+	</script>
+{% endblock %}

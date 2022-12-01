@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="w-25 p-3 container">
+        <form action="/customer">
+            <button class="mb-3 w-100 p-3 btn-primary btn" type="submit">Customer Info</button>
+        </form>
+
+        <form action="/roomtype">
+            <button class="mb-3 w-100 p-3 btn-primary btn" type="submit">Insert room type</button>
+        </form>
+
+        <form action="/report">
+            <button class="disabled mb-3 w-100 p-3 btn-primary btn" type="submit">See report</button>
+        </form>
+    </div>
+{% endblock %}

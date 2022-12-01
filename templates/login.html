@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="w-50 p-3 container">    
+        <form action="/login" method="post">
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input required type="text" name="user" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input required type="password" name="pwd" class="form-control">
+            </div>
+            {% if userAuth == 0%}
+                <div class="alert alert-danger" role="alert">
+                    Username or password is not correct
+                </div>
+            {% endif %}
+            <button type="submit" class="btn btn-primary">Log in</button>
+        </form>
+    </div>
+{% endblock %}

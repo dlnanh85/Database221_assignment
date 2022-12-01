@@ -1,0 +1,11 @@
+.container {
+    max-width: 2000px !important;
+}
+
+#navbarNav {
+    justify-content: space-between;
+}
+
+#login-container {
+    max-width: 100px;
+}

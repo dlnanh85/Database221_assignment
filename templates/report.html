@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="container">
+        <form action="/report" method="post">
+            <div class="form-group mb-3">
+                <label class="mb-1 ps-2">Branch</label>
+                <input type="text" name="branch" class="form-control" placeholder="Branch">
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="mb-1 ps-2">Year</label>
+                <input type="text" name="year" class="form-control" placeholder="Year">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    {% if rep %}    
+        <table>
+            <thead>
+                <th>Month</th>
+                <th>Number of customer</th>
+            </thead>
+            <tbody>
+                {% for rep in reps %}
+                    <tr>
+                        <td>{{ rep["MONTH"] }}</td>
+                        <td>{{ rep["COUNT(room_order_id)"] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock%}

@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="container w-75">
+        <form action="/roomtype" method="post">
+            <div class="form-group mb-3">
+                <label class="mb-1 ps-2">New room type</label>
+                <input type="text" name="name" class="form-control" placeholder="Enter type name">
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="mb-1 ps-2">Area</label>
+                <input type="text" name="area" class="form-control" placeholder="Enter area">
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="mb-1 ps-2">Max capacity (*)</label>
+                <input type="text" required name="maxCap" class="form-control" placeholder="Enter max capacity">
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="mb-1 ps-2">Description</label>
+                <input type="text" name="desc" class="form-control" placeholder="Enter description">
+            </div>
+
+            <div class="bed-list form-group mb-3">
+                <label class="ps-2">Bed</label>
+                <div id="bed-add" class="add-button d-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg> 
+                </div>
+                <div class="bed-item row mt-2">
+                    <div class="col-2">
+                        <input required type="text" name="bedSizes" class="form-control" placeholder="Enter size">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" name="bedNumbers" class="form-control" placeholder="Enter number">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="supply-list mb-3">
+                <label class="mb-1 ps-2">Supply</label>
+                <div id="supply-add" class="add-button d-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg> 
+                </div>
+                <div class="supply-item row mt-2">
+                    <div class="col-2">
+                        <select required name="supplyTypes" class="form-select">
+                            {% for supply in supplies %}
+                                <option value="{{ supply["id"] }}">{{ supply["id"] }}</option>
+                            {% endfor%}
+                        </select>   
+                    </div>
+                    <div class="col-2">
+                        <input type="text" name="supplyNumbers" class="form-control" placeholder="Number" value="1">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        {% if isSuccess == 1 %}
+            <div class="alert alert-success mt-4" role="alert">
+                New room type successfully added
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $("#bed-add").click(function(){
+                $(".bed-item:last-child").clone().appendTo(".bed-list");
+            });
+
+            $("#supply-add").click(function(){
+                $(".supply-item:last-child").clone().appendTo(".supply-list");
+            });
+        });
+    </script>
+{% endblock %}
