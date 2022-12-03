@@ -1,8 +1,8 @@
-DROP DATABASE ass;
+DROP DATABASE assignment2;
 
-CREATE DATABASE IF NOT EXISTS ass;
+CREATE DATABASE IF NOT EXISTS assignment2;
 
-USE ass;
+USE assignment2;
 
 -- 1
 CREATE TABLE Branch (
@@ -128,7 +128,7 @@ CREATE TABLE Customer (
   phone varchar(11) UNIQUE NOT NULL,
   email varchar(255) UNIQUE,
   username varchar(255) UNIQUE,
-  password varchar(255),
+  passignment2word varchar(255),
   point int NOT NULL DEFAULT 0 CHECK (point >= 0),
   customer_rank int DEFAULT 1 COMMENT '1-potential, 2-loyal, 3-vip, 4-supervip'
 	CHECK (customer_rank >= 1 AND customer_rank <= 4)
@@ -436,12 +436,12 @@ INSERT INTO Branch_image (branch_id, image) VALUES
 
 -- 3
 INSERT INTO Zone (branch_id, name) VALUES 
-  ('CN1', 'bai bien'),
-  ('CN1', 'ho boi'),
-  ('CN2', 'bai bien'),
-  ('CN3', 'phia dong'),
-  ('CN4', 'phia bac'),
-  ('CN4', 'phia nam');
+  ('CN1', 'beach'),
+  ('CN1', 'pool'),
+  ('CN2', 'beach'),
+  ('CN3', 'east'),
+  ('CN4', 'north'),
+  ('CN4', 'south');
 
 -- 4
 INSERT INTO Room_type (name, area, customer_no, description) VALUES
@@ -480,27 +480,27 @@ INSERT INTO Branch_room_type (room_type_id, branch_id, price) VALUES
 	
 -- 7
 INSERT INTO Room (branch_id, code, zone_name, room_type_id) VALUES 	
-  ('CN1', '101', 'bai bien', 1),
-  ('CN1', '102', 'bai bien', 2),
-  ('CN1', '103', 'ho boi', 5),
+  ('CN1', '101', 'beach', 1),
+  ('CN1', '102', 'beach', 2),
+  ('CN1', '103', 'pool', 5),
 
-  ('CN2', '101', 'bai bien', 1),
-  ('CN2', '102', 'bai bien', 3),
-  ('CN2', '103', 'bai bien', 4),
+  ('CN2', '101', 'beach', 1),
+  ('CN2', '102', 'beach', 3),
+  ('CN2', '103', 'beach', 4),
 
-  ('CN3', '101', 'phia dong', 2),
-  ('CN3', '102', 'phia dong', 3),
-  ('CN3', '103', 'phia dong', 5),
+  ('CN3', '101', 'east', 2),
+  ('CN3', '102', 'east', 3),
+  ('CN3', '103', 'east', 5),
 
-  ('CN4', '101', 'phia bac', 1),
-  ('CN4', '102', 'phia bac', 4),
-  ('CN4', '103', 'phia bac', 5);
+  ('CN4', '101', 'north', 1),
+  ('CN4', '102', 'north', 4),
+  ('CN4', '103', 'north', 5);
 	
 -- 8
 INSERT INTO Supply_type (id, name) VALUES
   ('VT0001', 'chair'),
   ('VT0002', 'table'),
-  ('VT0003', 'air condition'),
+  ('VT0003', 'air conditioner'),
   ('VT0004', 'fan');
 	
 -- 9
@@ -620,7 +620,7 @@ INSERT INTO Supply (branch_id, room_code, supply_type_id, id, status) VALUES
 	
 -- 11
 INSERT INTO Supply_provider (id, name, email, address) VALUES 	
-  ('NCC0001', 'THANH CHAIR INC.', 'tci@gmail.com', 'Quan Hoan Kiem, HN'),
+	('NCC0001', 'THANH CHAIR INC.', 'tci@gmail.com', 'Quan Hoan Kiem, HN'),
 	('NCC0002', 'TABLET CORP.', 'tc@gmail.com', 'Binh Duong'),
 	('NCC0003', 'AC INTERNATIONAL', 'aci@gmail.com', 'Da Nang'),
 	('NCC0004', 'FAN CORPORATION', 'fc@gmail.com', 'Q4, TPHCM'),
@@ -650,7 +650,7 @@ INSERT INTO Supply_providing (supply_provider_id, branch_id, supply_type_id) VAL
   ('NCC0005', 'CN4', 'VT0004');
 	
 -- 13
-INSERT INTO Customer (id, ssn, name, phone, email, username, password, point, customer_rank) VALUES
+INSERT INTO Customer (id, ssn, name, phone, email, username, passignment2word, point, customer_rank) VALUES
   ('KH000001', '111111111111', 'Nguyen Van A',  '0222112345', 'one@gmail.com',   'one',    '1234', DEFAULT, 1),
   ('KH000002', '333333333333', 'Nguyen Thi B',  '0123321456', 'two@gmail.com',   'two',    '4321', 5, 2),
   ('KH000003', '555555555555', 'Tran Van C',    '0987654321', 'three@gmail.com', 'three',  '4567', 9, 3),
@@ -740,13 +740,13 @@ INSERT INTO Souvenir_brand(service_id, brand) VALUES
 
 -- 24
 INSERT INTO Premises (branch_id, code, length, width, price, description, zone_name, service_id, store_name, logo) VALUES 
-  ('CN1', 1, 10, 20, 1000, NULL, 'bai bien', DEFAULT, DEFAULT, DEFAULT),
-  ('CN1', 2, 15, 20, 1500, NULL, 'ho boi', 'DVM004', 'Cua hang luu niem', DEFAULT),
-  ('CN2', 3, 13, 20, 1300, NULL, 'bai bien', 'DVR001', 'Nha hang Phap', DEFAULT),
-  ('CN2', 4, 11, 20, 1100, NULL, 'bai bien', 'DVM005', 'Cua hang luu niem', DEFAULT),
-  ('CN3', 5, 20, 20, 2000, NULL, 'phia dong', 'DVR002', 'Nha hang Y', DEFAULT),
-  ('CN4', 6, 25, 20, 2500, NULL, 'phia nam', 'DVS003', 'Spa Phap', DEFAULT),
-  ('CN4', 7, 23, 20, 2300, NULL, 'phia nam', 'DVC006', 'Circle K', DEFAULT);
+  ('CN1', 1, 10, 20, 1000, NULL, 'beach', DEFAULT, DEFAULT, DEFAULT),
+  ('CN1', 2, 15, 20, 1500, NULL, 'pool', 'DVM004', 'Cua hang luu niem', DEFAULT),
+  ('CN2', 3, 13, 20, 1300, NULL, 'beach', 'DVR001', 'Nha hang Phap', DEFAULT),
+  ('CN2', 4, 11, 20, 1100, NULL, 'beach', 'DVM005', 'Cua hang luu niem', DEFAULT),
+  ('CN3', 5, 20, 20, 2000, NULL, 'east', 'DVR002', 'Nha hang Y', DEFAULT),
+  ('CN4', 6, 25, 20, 2500, NULL, 'south', 'DVS003', 'Spa Phap', DEFAULT),
+  ('CN4', 7, 23, 20, 2300, NULL, 'south', 'DVC006', 'Circle K', DEFAULT);
 
 -- 25
 INSERT INTO Premises_image (branch_id, premises_code, image) VALUES 

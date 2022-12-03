@@ -1,6 +1,5 @@
-
 -- 1 
-drop procedure if exists ass.GoiDichVu;
+DROP PROCEDURE IF EXISTS assignment2.GoiDichVu;
 
 DELIMITER $$
 CREATE PROCEDURE GoiDichVu (
@@ -24,29 +23,7 @@ END
 $$
 DELIMITER ;
 
--- 2
-drop procedure if exists ass.ThongKeLuotKhach;
 
-delimiter $$
-CREATE PROCEDURE ass.ThongKeLuotKhach (
-	IN branch_identity varchar(6),
-	IN year_no YEAR,
-	OUT customer_statistic int,
-	OUT month_no varchar(2)
-)
-	
-BEGIN
-	SELECT DISTINCT YEAR(checkin_date) AS 'YEAR', MONTH(checkin_date) AS 'MONTH', COUNT(room_order_id)
-	FROM Room_order INNER JOIN Rent_room ON Room_order.id = Rent_room.room_order_id  WHERE status = 1 AND branch_id = branch_identity AND year_no = YEAR(checkin_date)
-	GROUP BY YEAR(checkin_date), MONTH(checkin_date);
-END
-$$
-delimiter ;
-
--- TESTING SCRIPTS
--- Test Procedure 1
--- CALL ass.GoiDichVu('KH000005', @package_type, @customer_limitation, @start_date, @end_date, @remain_date);
--- SELECT @remain_date; 
-
--- Test Procedure 2
-CALL ass.Thongkesomething('CN4', '2022', @customer_statistic, @month_no);
+-- CALLING PROCEDURE GOIDICHVU
+CALL assignment2.GoiDichVu('KH000005', @package_type, @customer_limitation, @start_date, @end_date, @remain_date);
+SELECT @package_type, @customer_limitation, @start_date, @end_date, @remain_date; 
