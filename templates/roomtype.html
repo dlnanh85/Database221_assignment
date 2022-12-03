@@ -32,10 +32,10 @@
                     </svg> 
                 </div>
                 <div class="bed-item row mt-2">
-                    <div class="col-2">
+                    <div class="col-3">
                         <input required type="text" name="bedSizes" class="form-control" placeholder="Enter size">
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <input type="text" name="bedNumbers" class="form-control" placeholder="Enter number">
                     </div>
                 </div>
@@ -50,14 +50,14 @@
                     </svg> 
                 </div>
                 <div class="supply-item row mt-2">
-                    <div class="col-2">
+                    <div class="col-3">
                         <select required name="supplyTypes" class="form-select">
                             {% for supply in supplies %}
-                                <option value="{{ supply["id"] }}">{{ supply["id"] }}</option>
+                                <option value="{{ supply["id"] }}">{{ supply["name"] }}</option>
                             {% endfor%}
                         </select>   
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <input type="text" name="supplyNumbers" class="form-control" placeholder="Number" value="1">
                     </div>
                 </div>
