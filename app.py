@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 
 # # Configure database
-mainDB = SQL("mysql://root:158502@localhost:3306/ass")
+mainDB = SQL("mysql://root:158502@localhost:3306/assignment2")
 userDB = SQL("mysql://root:158502@localhost:3306/User")
 
 
@@ -81,7 +81,7 @@ def customer_detail():
 # START: Add Room type   
 @app.route("/roomtype", methods=["GET", "POST"])
 def roomtype_update():
-    supplies = mainDB.execute("SELECT id FROM Supply_type")
+    supplies = mainDB.execute("SELECT * FROM Supply_type")
 
     if request.method == "POST":
         name = request.form.get("name")
